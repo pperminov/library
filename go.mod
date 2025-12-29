@@ -1,21 +1,19 @@
 module github.com/s-r-engineer/library
 
-go 1.23.0
-
-toolchain go1.24.3
+go 1.25.5
 
 require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/influxdata/line-protocol/v2 v2.2.1
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	go.uber.org/multierr v1.11.0
-	golang.org/x/crypto v0.39.0
-	golang.org/x/sync v0.16.0
-	golang.org/x/term v0.33.0
+	golang.org/x/crypto v0.46.0
+	golang.org/x/sync v0.19.0
+	golang.org/x/term v0.38.0
 )
 
 require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/sys v0.39.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

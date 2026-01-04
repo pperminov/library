@@ -34,3 +34,11 @@ func RandString(n int) string {
 
 	return sb.String()
 }
+
+func GetRandomFromSlice(s []string) string {
+	if len(s) == 0 {
+		return ""
+	}
+	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
+	return s[rng.Intn(len(s))]
+}

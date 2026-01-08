@@ -1,8 +1,8 @@
 package libraryDereferer
 
 import (
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	librarySync "github.com/s-r-engineer/library/sync"
+	libraryErrors "github.com/pperminov/library/errors"
+	librarySync "github.com/pperminov/library/sync"
 )
 
 const defaultStackSize = 100

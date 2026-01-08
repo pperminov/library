@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"io"
 
-	libraryEncryption "github.com/s-r-engineer/library/encryption"
-	libraryNetwork "github.com/s-r-engineer/library/network"
+	libraryEncryption "github.com/pperminov/library/encryption"
+	libraryNetwork "github.com/pperminov/library/network"
 )
 
 func MakeAHellCircle(connection libraryNetwork.GenericConnection) (libraryNetwork.GenericConnection, error) {
@@ -33,7 +33,7 @@ func MakeAHellCircle(connection libraryNetwork.GenericConnection) (libraryNetwor
 }
 
 type HellCircle struct {
-	connection libraryNetwork.GenericConnection
+	connection               libraryNetwork.GenericConnection
 	EDToDecrypt, EDToEncrypt *libraryEncryption.ED
 }
 

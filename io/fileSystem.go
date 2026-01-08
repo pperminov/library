@@ -1,9 +1,10 @@
 package libraryIO
 
 import (
-	libraryDereferer "github.com/s-r-engineer/library/dereferer"
 	"os"
 	"strings"
+
+	libraryDereferer "github.com/pperminov/library/dereferer"
 )
 
 const create = os.O_CREATE

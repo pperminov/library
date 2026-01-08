@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/influxdata/line-protocol/v2/lineprotocol"
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	librarySync "github.com/s-r-engineer/library/sync"
+	libraryErrors "github.com/pperminov/library/errors"
+	librarySync "github.com/pperminov/library/sync"
 )
 
 func NewAccumulator() Accumulator {

@@ -9,8 +9,8 @@ import (
 
 	"golang.org/x/crypto/hkdf"
 
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	libraryNetwork "github.com/s-r-engineer/library/network"
+	libraryErrors "github.com/pperminov/library/errors"
+	libraryNetwork "github.com/pperminov/library/network"
 )
 
 // TODO Failing with some reason. Need to investigate

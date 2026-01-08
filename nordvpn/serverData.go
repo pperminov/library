@@ -3,9 +3,10 @@ package libraryNordvpn
 import (
 	"encoding/json"
 	"fmt"
-	libraryHttp "github.com/s-r-engineer/library/http"
 	"io"
 	"net"
+
+	libraryHttp "github.com/pperminov/library/http"
 )
 
 const DefaultRecommendationsURL = "https://api.nordvpn.com/v1/servers/recommendations?filters[servers_technologies][identifier]=wireguard_udp&limit=1"

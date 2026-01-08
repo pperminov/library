@@ -4,7 +4,8 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
-	libraryErrors "github.com/s-r-engineer/library/errors"
+
+	libraryErrors "github.com/pperminov/library/errors"
 )
 
 type Certificatron struct {

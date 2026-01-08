@@ -2,9 +2,10 @@ package libraryNordvpn
 
 import (
 	"encoding/json"
-	libraryHttp "github.com/s-r-engineer/library/http"
 	"io"
 	"net/http"
+
+	libraryHttp "github.com/pperminov/library/http"
 )
 
 const DefaultUserCredentialsURL = "https://api.nordvpn.com/v1/users/services/credentials"

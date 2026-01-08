@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	libraryStrings "github.com/s-r-engineer/library/strings"
+	libraryStrings "github.com/pperminov/library/strings"
 )
 
 func TestValueOrDefault(t *testing.T) {

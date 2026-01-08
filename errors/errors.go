@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	libraryLogging "github.com/s-r-engineer/library/logging"
+	libraryLogging "github.com/pperminov/library/logging"
 )
 
 func Panicer(err any) {

@@ -3,8 +3,8 @@ package libraryEncryption_test
 import (
 	"testing"
 
-	libraryEncryption "github.com/s-r-engineer/library/encryption"
-	libraryTesting "github.com/s-r-engineer/library/testing"
+	libraryEncryption "github.com/pperminov/library/encryption"
+	libraryTesting "github.com/pperminov/library/testing"
 	"github.com/stretchr/testify/require"
 )
 

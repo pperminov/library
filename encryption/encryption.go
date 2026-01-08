@@ -6,8 +6,8 @@ import (
 	"crypto/sha512"
 	"encoding/binary"
 
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	libraryNumbers "github.com/s-r-engineer/library/numbers"
+	libraryErrors "github.com/pperminov/library/errors"
+	libraryNumbers "github.com/pperminov/library/numbers"
 	"golang.org/x/crypto/pbkdf2"
 )
 

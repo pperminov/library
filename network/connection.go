@@ -3,7 +3,7 @@ package libraryNetwork
 import (
 	"io"
 
-	libraryErrors "github.com/s-r-engineer/library/errors"
+	libraryErrors "github.com/pperminov/library/errors"
 )
 
 func ReadConnection[T uint | uint32 | uint64](conn GenericConnection, length T) (data []byte, err error) {

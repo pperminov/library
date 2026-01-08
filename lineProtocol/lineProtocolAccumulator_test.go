@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	libraryNumbers "github.com/s-r-engineer/library/numbers"
-	libraryStrings "github.com/s-r-engineer/library/strings"
+	libraryErrors "github.com/pperminov/library/errors"
+	libraryNumbers "github.com/pperminov/library/numbers"
+	libraryStrings "github.com/pperminov/library/strings"
 	"github.com/stretchr/testify/require"
 )
 

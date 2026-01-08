@@ -2,10 +2,11 @@ package libraryNordvpn
 
 import (
 	"encoding/json"
-	libraryErrors "github.com/s-r-engineer/library/errors"
-	libraryHttp "github.com/s-r-engineer/library/http"
 	"io"
 	"strings"
+
+	libraryErrors "github.com/pperminov/library/errors"
+	libraryHttp "github.com/pperminov/library/http"
 )
 
 const DefaultCountriesListURL = "https://api.nordvpn.com/v1/countries"

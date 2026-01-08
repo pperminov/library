@@ -6,8 +6,9 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	libraryIO "github.com/s-r-engineer/library/io"
 	"strings"
+
+	libraryIO "github.com/pperminov/library/io"
 )
 
 func LoadRSAPublicKeyFromBytes(data []byte) (*rsa.PublicKey, error) {

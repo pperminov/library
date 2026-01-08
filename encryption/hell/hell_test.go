@@ -3,25 +3,25 @@ package hell_test
 import (
 	"testing"
 
-	"github.com/s-r-engineer/library/encryption/hell"
-	libraryNetwork "github.com/s-r-engineer/library/network"
-	libraryNumbers "github.com/s-r-engineer/library/numbers"
-	libraryStrings "github.com/s-r-engineer/library/strings"
-	libraryTesting "github.com/s-r-engineer/library/testing"
+	"github.com/pperminov/library/encryption/hell"
+	libraryNetwork "github.com/pperminov/library/network"
+	libraryNumbers "github.com/pperminov/library/numbers"
+	libraryStrings "github.com/pperminov/library/strings"
+	libraryTesting "github.com/pperminov/library/testing"
 	"github.com/stretchr/testify/require"
 )
 
 func TestHell(t *testing.T) {
 	conn1, conn2 := libraryTesting.NewLinkedMockConnections()
-	
+
 	done := make(chan bool, 2)
-	
+
 	WriteThrough1 := make(chan []byte)
 	WriteThrough2 := make(chan []byte)
-	
+
 	ReadFrom1 := make(chan []byte)
 	ReadFrom2 := make(chan []byte)
-	
+
 	writeToFirst := func(s []byte) {
 		WriteThrough1 <- s
 	}
@@ -34,7 +34,7 @@ func TestHell(t *testing.T) {
 	readFromSecond := func() []byte {
 		return <-ReadFrom2
 	}
-	
+
 	go func() {
 		h, err := hell.MakeAHellCircle(conn1)
 		require.NoError(t, err)
@@ -50,7 +50,7 @@ func TestHell(t *testing.T) {
 		go reader(ReadFrom2, h, t)
 
 	}()
-	
+
 	<-done
 	<-done
 

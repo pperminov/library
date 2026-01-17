@@ -72,7 +72,7 @@ func (e *ED) DecryptAES(encryptedBytes []byte) ([]byte, error) {
 		return nil, err
 	}
 	if len(encryptedBytes) < e.nonceLength {
-		return nil, libraryErrors.WrapError("ciphertext too short", nil)
+		return nil, libraryErrors.NewError("ciphertext too short")
 	}
 	nonce, ciphertext := encryptedBytes[:e.nonceLength], encryptedBytes[e.nonceLength:]
 

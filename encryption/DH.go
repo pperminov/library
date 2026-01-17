@@ -13,48 +13,6 @@ import (
 	libraryNetwork "github.com/pperminov/library/network"
 )
 
-// TODO Failing with some reason. Need to investigate
-// func GetDHSecretFromConnection(conn libraryNetwork.GenericConnection, p *big.Int, g *big.Int) ([]byte, error) {
-// 	wrappedError := libraryErrors.PartWrapError("GetDHSecretFromConnection")
-
-// 	priv, err := rand.Int(rand.Reader, p)
-// 	if err != nil {
-// 		return nil, wrappedError(err)
-// 	}
-
-// 	pub := new(big.Int).Exp(g, priv, p)
-// 	pubBytes := pub.Bytes()
-// 	lenBuf := []byte{byte(len(pubBytes))}
-// 	if _, err := conn.Write(lenBuf); err != nil {
-// 		return nil, wrappedError(err)
-// 	}
-// 	if _, err := conn.Write(pubBytes); err != nil {
-// 		return nil, wrappedError(err)
-// 	}
-// 	lenBuf = make([]byte, 1)
-
-// 	if _, err := io.ReadFull(conn, lenBuf); err != nil {
-// 		return nil, wrappedError(err)
-// 	}
-// 	pubLen := int(lenBuf[0])
-
-// 	otherSidePub := make([]byte, pubLen)
-// 	if _, err := io.ReadFull(conn, otherSidePub); err != nil {
-// 		return nil, wrappedError(err)
-// 	}
-
-// 	otherSide := new(big.Int).SetBytes(otherSidePub)
-
-// 	if otherSide.Cmp(big.NewInt(1)) <= 0 || otherSide.Cmp(new(big.Int).Sub(p, big.NewInt(1))) >= 0 {
-// 		return nil, wrappedError(fmt.Errorf("invalid public key received"))
-// 	}
-
-// 	sharedSecret := new(big.Int).Exp(otherSide, priv, p)
-// 	symmetricKey := sha256.Sum256(sharedSecret.Bytes())
-
-// 	return symmetricKey[:], nil
-// }
-
 func GetECDHKeysFromConnectionWithKeyDerivation(conn libraryNetwork.GenericConnection) (sendKey, recvKey []byte, err error) {
 	secret, pubKeyBytes, otherPubKeyBytes, err := getECDHKeysFromConnection(conn)
 	if err != nil {

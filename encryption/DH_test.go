@@ -8,38 +8,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TODO make multiple requests in a row
-// TODO Failing with some reason. Need to investigate
-// func TestGetDHSecretFromConnection(t *testing.T) {
-// 	p, _ := new(big.Int).SetString("23", 10)
-// 	g := big.NewInt(5)
-
-// 	clientConn, serverConn := libraryTesting.NewLinkedMockConnections()
-
-// 	var clientSecret, serverSecret []byte
-// 	var clientErr, serverErr error
-
-// 	done := make(chan struct{})
-
-// 	go func() {
-// 		clientSecret, clientErr = libraryEncryption.GetDHSecretFromConnection(clientConn, p, g)
-// 		done <- struct{}{}
-// 	}()
-
-// 	go func() {
-// 		serverSecret, serverErr = libraryEncryption.GetDHSecretFromConnection(serverConn, p, g)
-// 		done <- struct{}{}
-// 	}()
-
-// 	<-done
-// 	<-done
-
-// 	require.NoError(t, clientErr)
-// 	require.NoError(t, serverErr)
-
-// 	require.Equal(t, clientSecret, serverSecret)
-// }
-
 func TestGetECDHSecretFromConnectionWithKeyDerivation(t *testing.T) {
 	clientConn, serverConn := libraryTesting.NewLinkedMockConnections()
 

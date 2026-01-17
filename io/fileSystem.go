@@ -26,7 +26,7 @@ func CreateAndOpenFileForWrite(filePath string) (*os.File, error) {
 }
 
 func CreateAndOpenFileForAppend(filePath string) (*os.File, error) {
-	return os.OpenFile(filePath, create|appendData, 0600)
+	return os.OpenFile(filePath, create|appendData|write, 0600)
 }
 
 func OpenFile(filePath string) (*os.File, error) {

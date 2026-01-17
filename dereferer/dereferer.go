@@ -16,10 +16,16 @@ func GetDereferer(stackSize int, FIFO bool) (func(func()) error, func()) {
 	add, done, wait := librarySync.GetWait()
 	lock, unlock := librarySync.GetMutex()
 	closeOnce := librarySync.GetOnce()
+	closed := false
 
 	push := func(f func()) error {
 		if f == nil {
 			return libraryErrors.NewError("empty function")
+		}
+		lock()
+		defer unlock()
+		if closed {
+			return libraryErrors.NewError("dereferer is closed")
 		}
 		select {
 		case derefererStack <- f:
@@ -31,11 +37,12 @@ func GetDereferer(stackSize int, FIFO bool) (func(func()) error, func()) {
 
 	drain := func() {
 		lock()
-		defer unlock()
 
 		closeOnce(func() {
+			closed = true
 			close(derefererStack)
 		})
+		unlock()
 
 		if FIFO {
 			for f := range derefererStack {

@@ -1,11 +1,10 @@
 package libraryEncryption
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-
-	libraryStrings "github.com/pperminov/library/strings"
 )
 
 func TestValueOrDefault(t *testing.T) {
@@ -31,8 +30,8 @@ func TestValueOrDefault(t *testing.T) {
 }
 
 func TestED(t *testing.T) {
-	salt := []byte(libraryStrings.RandString(16))
-	passphrase := []byte(libraryStrings.RandString(32))
+	salt := []byte("0123456789abcdef")
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
 	ed, err := NewED(passphrase, salt, 0, 0, 46)
 	require.NoError(t, err)
 	// require.Equal(t, ed.iterations, iterations)
@@ -41,9 +40,9 @@ func TestED(t *testing.T) {
 }
 
 func TestEncryptor(t *testing.T) {
-	salt := []byte(libraryStrings.RandString(16))
-	data := []byte(libraryStrings.RandString(666))
-	passphrase := []byte(libraryStrings.RandString(32))
+	salt := []byte("0123456789abcdef")
+	data := []byte(strings.Repeat("a", 666))
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
 	ed, err := NewED(passphrase, salt, 0, 0, 8)
 	require.NoError(t, err)
 	encrypted, err := ed.EncryptAES(data)
@@ -53,10 +52,67 @@ func TestEncryptor(t *testing.T) {
 	require.Equal(t, data, decrypted)
 }
 
+func TestEncryptorNonceUniqueness(t *testing.T) {
+	salt := []byte("0123456789abcdef")
+	data := []byte(strings.Repeat("b", 64))
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
+
+	ed, err := NewED(passphrase, salt, 0, 0, 8)
+	require.NoError(t, err)
+
+	encrypted1, err := ed.EncryptAES(data)
+	require.NoError(t, err)
+	encrypted2, err := ed.EncryptAES(data)
+	require.NoError(t, err)
+
+	require.NotEqual(t, encrypted1, encrypted2)
+}
+
+func TestDecryptAESSadPath(t *testing.T) {
+	salt := []byte("0123456789abcdef")
+	data := []byte(strings.Repeat("c", 64))
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
+
+	ed, err := NewED(passphrase, salt, 0, 0, 8)
+	require.NoError(t, err)
+	encrypted, err := ed.EncryptAES(data)
+	require.NoError(t, err)
+
+	tampered := make([]byte, len(encrypted))
+	copy(tampered, encrypted)
+	tampered[len(tampered)-1] ^= 0xFF
+	_, err = ed.DecryptAES(tampered)
+	require.Error(t, err)
+
+	short := encrypted[:ed.nonceLength-1]
+	_, err = ed.DecryptAES(short)
+	require.Error(t, err)
+
+	otherED, err := NewED([]byte("fedcba9876543210fedcba9876543210"), []byte("fedcba9876543210"), 0, 0, 8)
+	require.NoError(t, err)
+	_, err = otherED.DecryptAES(encrypted)
+	require.Error(t, err)
+}
+
+func TestDecryptAESShortCiphertext(t *testing.T) {
+	salt := []byte("0123456789abcdef")
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
+
+	ed, err := NewED(passphrase, salt, 0, 0, 8)
+	require.NoError(t, err)
+
+	_, err = ed.DecryptAES(nil)
+	require.Error(t, err)
+
+	short := make([]byte, ed.nonceLength-1)
+	_, err = ed.DecryptAES(short)
+	require.Error(t, err)
+}
+
 func BenchmarkEncryptor(b *testing.B) {
-	salt := []byte(libraryStrings.RandString(16))
-	data := []byte(libraryStrings.RandString(666))
-	passphrase := []byte(libraryStrings.RandString(32))
+	salt := []byte("0123456789abcdef")
+	data := []byte(strings.Repeat("a", 666))
+	passphrase := []byte("0123456789abcdef0123456789abcdef")
 	ed, err := NewED(passphrase, salt, 0, 0, 8)
 	require.NoError(b, err)
 	for b.Loop() {
